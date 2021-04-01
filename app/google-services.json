@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "346951139034",
+    "project_id": "booster-fuel-delivery-and-s",
+    "storage_bucket": "booster-fuel-delivery-and-s.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346951139034:android:f97d4dc1f8a33dd0c42fe3",
+        "android_client_info": {
+          "package_name": "com.boosterfueldeliveryservices"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346951139034-eaf591ee12mquptlo0srshl5jm4sve0n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boosterfueldeliveryservices",
+            "certificate_hash": "344c32a0934ca205d2a2d3d6ccaa9302fdb98300"
+          }
+        },
+        {
+          "client_id": "346951139034-tlmj6ia509ta5o1oetoio45gafdvu2g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNWh-QXIem1wiWptfDtbmZQKZ_WLKcS7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346951139034-tlmj6ia509ta5o1oetoio45gafdvu2g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
