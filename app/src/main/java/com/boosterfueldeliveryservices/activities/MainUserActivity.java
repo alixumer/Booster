@@ -21,6 +21,7 @@ import com.boosterfueldeliveryservices.adapters.AdapterOrderUser;
 import com.boosterfueldeliveryservices.adapters.AdapterShop;
 import com.boosterfueldeliveryservices.models.ModelOrderUser;
 import com.boosterfueldeliveryservices.models.ModelShop;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,11 +38,12 @@ import java.util.HashMap;
 
 public class MainUserActivity extends AppCompatActivity {
 
-    private TextView nameTv, emailTv, phoneTv, tabShopsTv, tabOrdersTv ;
-    private RelativeLayout shopsRl, ordersRl;
+    private TextView nameTv, emailTv, phoneTv, tabMapsTv, tabShopsTv, tabOrdersTv ;
+    private RelativeLayout mapsRl, shopsRl, ordersRl;
     private ImageButton logoutBtn, editProfileBtn, settingsBtn;
     private ImageView profileIv;
     private RecyclerView shopsRv, ordersRv;
+    private MapView mapsMv;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -59,11 +61,14 @@ public class MainUserActivity extends AppCompatActivity {
         nameTv = findViewById(R.id.nameTv);
         emailTv = findViewById(R.id.emailTv);
         phoneTv = findViewById(R.id.phoneTv);
+        tabMapsTv = findViewById(R.id.tabMapsTv);
         tabShopsTv = findViewById(R.id.tabShopsTv);
         tabOrdersTv = findViewById(R.id.tabOrdersTv);
+        mapsRl = findViewById(R.id.mapsRl);
         shopsRv = findViewById(R.id.shopsRv);
         ordersRv = findViewById(R.id.ordersRv);
 
+        mapsMv = findViewById(R.id.mapsMv);
         shopsRl = findViewById(R.id.shopsRl);
         ordersRl = findViewById(R.id.ordersRl);
         editProfileBtn = findViewById(R.id.editProfileBtn);
@@ -101,6 +106,13 @@ public class MainUserActivity extends AppCompatActivity {
             }
         });
 
+        tabMapsTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showMapsUI();
+            }
+        });
+
         tabShopsTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,10 +136,30 @@ public class MainUserActivity extends AppCompatActivity {
         });
     }
 
+    private void showMapsUI(){
+        //show maps ui, hide shops, orders here
+        mapsRl.setVisibility(View.VISIBLE);
+        shopsRl.setVisibility(View.GONE);
+        ordersRl.setVisibility(View.GONE);
+
+        tabMapsTv.setTextColor(getResources().getColor(R.color.colorBlack));
+        tabMapsTv.setBackgroundResource(R.drawable.shape_rect04);
+
+        tabShopsTv.setTextColor(getResources().getColor(R.color.colorWhite));
+        tabShopsTv.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+        tabOrdersTv.setTextColor(getResources().getColor(R.color.colorWhite));
+        tabOrdersTv.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+    }
+
     private void showShopsUI() {
-        //show shops ui, hide orders ui
+        //show shops ui, hide orders, maps ui
+        mapsRl.setVisibility(View.GONE);
         shopsRl.setVisibility(View.VISIBLE);
         ordersRl.setVisibility(View.GONE);
+
+        tabMapsTv.setTextColor(getResources().getColor(R.color.colorWhite));
+        tabMapsTv.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
         tabShopsTv.setTextColor(getResources().getColor(R.color.colorBlack));
         tabShopsTv.setBackgroundResource(R.drawable.shape_rect04);
@@ -138,9 +170,13 @@ public class MainUserActivity extends AppCompatActivity {
     }
 
     private void showOrdersUI() {
-        //show orders ui, hide Shops ui
+        //show orders ui, hide Shops, maps ui
+        mapsRl.setVisibility(View.GONE);
         shopsRl.setVisibility(View.GONE);
         ordersRl.setVisibility(View.VISIBLE);
+
+        tabMapsTv.setTextColor(getResources().getColor(R.color.colorWhite));
+        tabMapsTv.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
         tabShopsTv.setTextColor(getResources().getColor(R.color.colorWhite));
         tabShopsTv.setBackgroundColor(getResources().getColor(android.R.color.transparent));
@@ -218,6 +254,7 @@ public class MainUserActivity extends AppCompatActivity {
                             //load only those shops that are in the city of user
                             loadShops(city);
                             loadOrders();
+                            loadMap();
 
                         }
                     }
@@ -227,6 +264,10 @@ public class MainUserActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private void loadMap() {
+
     }
 
     private void loadOrders() {

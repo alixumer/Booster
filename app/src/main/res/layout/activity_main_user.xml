@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainUserActivity">
 
+
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
@@ -87,6 +88,16 @@
             android:orientation="horizontal"
             android:layout_marginTop="5dp">
 
+            <!--Map-->
+            <TextView
+                android:id="@+id/tabMapsTv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Map"
+                android:textColor="@color/colorWhite"/>
+
             <!--Shops-->
             <TextView
                 android:id="@+id/tabShopsTv"
@@ -112,8 +123,28 @@
 
     </RelativeLayout>
 
+    <!--Maps UI-->
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/mapsRl"
+        android:layout_below="@id/toolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapsMv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.60"/>
+
+
+
+
+    </RelativeLayout>
+
     <!--Petrol Shops UI-->
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/shopsRl"
         android:layout_below="@id/toolbarRl"
         android:layout_width="match_parent"
