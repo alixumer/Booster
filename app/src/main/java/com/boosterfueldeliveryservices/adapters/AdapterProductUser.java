@@ -22,9 +22,6 @@ import com.boosterfueldeliveryservices.R;
 import com.boosterfueldeliveryservices.activities.ShopDetailsActivity;
 import com.boosterfueldeliveryservices.models.ModelProduct;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import p32929.androideasysql_library.Column;
@@ -69,8 +66,8 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
         holder.titleTv.setText(productTitle);
         holder.discountedNoteTv.setText(discountNote);
         holder.descriptionTv.setText(productDescription);
-        holder.originalPriceTv.setText("$"+originalPrice);
-        holder.discountedPriceTv.setText("$"+discountPrice);
+        holder.originalPriceTv.setText("Rs."+originalPrice);
+        holder.discountedPriceTv.setText("Rs."+discountPrice);
 
         if (discountAvailable.equals("true")){
             //product is on discount
@@ -156,8 +153,8 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
             price = modelProduct.getOriginalPrice();
         }
 
-        cost = Double.parseDouble(price.replaceAll("$", ""));
-        finalCost = Double.parseDouble(price.replaceAll("$", ""));
+        cost = Double.parseDouble(price.replaceAll("Rs.", ""));
+        finalCost = Double.parseDouble(price.replaceAll("Rs.", ""));
 
         quantity = 1;
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -176,9 +173,9 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
         descriptionTv.setText(""+description);
         discountedNoteTv.setText(""+discountNote);
         quantityTv.setText(""+quantity);
-        originalPriceTv.setText("$"+modelProduct.getOriginalPrice());
-        priceDiscountTv.setText("$"+modelProduct.getDiscountPrice());
-        finalPriceTv.setText("$"+finalCost);
+        originalPriceTv.setText("Rs."+modelProduct.getOriginalPrice());
+        priceDiscountTv.setText("Rs."+modelProduct.getDiscountPrice());
+        finalPriceTv.setText("Rs."+finalCost);
 
         final AlertDialog dialog = builder.create();
         dialog.show();
@@ -190,7 +187,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
                 finalCost = finalCost + cost;
                 quantity++;
 
-                finalPriceTv.setText("$"+finalCost);
+                finalPriceTv.setText("Rs."+finalCost);
                 quantityTv.setText(""+quantity);
             }
         });
@@ -203,7 +200,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
                     finalCost = finalCost - cost;
                     quantity--;
 
-                    finalPriceTv.setText("$"+finalCost);
+                    finalPriceTv.setText("Rs."+finalCost);
                     quantityTv.setText(""+quantity);
 
                 }
@@ -215,7 +212,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
             public void onClick(View view) {
                 String title = titleTv.getText().toString().trim();
                 String priceEach = price;
-                String totalPrice = finalPriceTv.getText().toString().trim().replace("$","");
+                String totalPrice = finalPriceTv.getText().toString().trim().replace("Rs.","");
                 String quantity = quantityTv.getText().toString().trim();
 
                 //add to database(SQLite)

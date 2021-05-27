@@ -1,5 +1,4 @@
 package com.boosterfueldeliveryservices;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -16,8 +14,6 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-
-import com.boosterfueldeliveryservices.R;
 import com.boosterfueldeliveryservices.activities.OrderDetailsSellerActivity;
 import com.boosterfueldeliveryservices.activities.OrderDetailsUsersActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -127,6 +123,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         notificationManager.notify(notificationID, notificationBuilder.build());
 
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setupNotificationChannel(NotificationManager notificationManager) {

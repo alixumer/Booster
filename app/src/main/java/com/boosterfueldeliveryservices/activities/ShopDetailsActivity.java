@@ -322,7 +322,8 @@ public class ShopDetailsActivity extends AppCompatActivity {
 
             allTotalPrice = allTotalPrice + Double.parseDouble(cost);
 
-            ModelCartItem modelCartItem = new ModelCartItem(""+id,
+            ModelCartItem modelCartItem = new ModelCartItem(
+                    ""+id,
                     ""+pId,
                     ""+name,
                     ""+price,
@@ -337,9 +338,9 @@ public class ShopDetailsActivity extends AppCompatActivity {
         //set to recycler view
         cartItemsRv.setAdapter(adapterCartItem);
 
-        dFeeTv.setText("$"+deliveryFee);
-        sTotalTv.setText("$"+String.format(".%2f",allTotalPrice));
-        allTotalPriceTv.setText("$"+(allTotalPrice + Double.parseDouble(deliveryFee.replace("$", ""))));
+        dFeeTv.setText("Rs."+deliveryFee);
+        sTotalTv.setText("Rs."+String.format("%.2f",allTotalPrice));
+        allTotalPriceTv.setText("Rs."+(allTotalPrice + Double.parseDouble(deliveryFee.replace("Rs.", ""))));
 
         //show dialog
         AlertDialog alertDialog = builder.create();
@@ -393,7 +394,7 @@ public class ShopDetailsActivity extends AppCompatActivity {
         //for order id and order time
         final String timestamp = ""+System.currentTimeMillis();
 
-        String cost = allTotalPriceTv.getText().toString().trim().replace("$", "");
+        String cost = allTotalPriceTv.getText().toString().trim().replace("Rs.", "");
 
         //add latitude, longitude of user to each other | delete previous orders from firebase or add manually to them
 
@@ -435,12 +436,6 @@ public class ShopDetailsActivity extends AppCompatActivity {
                         }
                         progressDialog.dismiss();
                         Toast.makeText(ShopDetailsActivity.this, "Order Placed Successfully", Toast.LENGTH_SHORT).show();
-
-                        //open order details activity, we need two keys there, orderId, orderTo
-                        Intent intent = new Intent(ShopDetailsActivity.this, OrderDetailsUsersActivity.class);
-                        intent.putExtra("orderTo", shopUid);
-                        intent.putExtra("orderId", timestamp);
-                        startActivity(intent);
 
                         preparedNotificationMessage(timestamp);
                     }
@@ -577,7 +572,7 @@ public class ShopDetailsActivity extends AppCompatActivity {
         //when user places order send notifications to seller
 
         //prepare data for notification
-        String NOTIFICATION_TOPIC = "/topics" +Constants.FOM_TOPIC; //must be same as subscribed by user
+        String NOTIFICATION_TOPIC = "/topics/" +Constants.FOM_TOPIC; //must be same as subscribed by user
         String NOTIFICATION_TITLE = "New Order"+ orderId;
         String NOTIFICATION_MESSAGE = "Congratulations...! You have new order";
         String NOTIFICATION_TYPE = "NewOrder";

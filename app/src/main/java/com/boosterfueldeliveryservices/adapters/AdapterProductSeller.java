@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 
 public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller> implements Filterable {
 
-    private Context context;
+    private final Context context;
     public ArrayList<ModelProduct> productList, filterList;
     private FilterProduct filter;
 
@@ -73,8 +74,8 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         holder.titleTv.setText(title);
         holder.quantityTv.setText(quantity);
         holder.discountedNoteTv.setText(discountNote);
-        holder.discountedPriceTv.setText("$"+discountPrice);
-        holder.discountedPriceTv.setText("$"+originalPrice);
+        holder.discountedPriceTv.setText("Rs."+discountPrice);
+        holder.originalPriceTv.setText("Rs."+originalPrice);
 
         if (discountAvailable.equals("true")){
             //product is on discount
@@ -109,7 +110,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
     private void detailsBottomSheet(ModelProduct modelProduct){
         //bottom sheet
-      final  BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+        final  BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         //inflate view for bottom sheet
         View view = LayoutInflater.from(context).inflate(R.layout.bs_product_details_seller,null);
 
@@ -152,8 +153,8 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         categoryTv.setText(productCategory);
         quantityTv.setText(quantity);
         discountNoteTv.setText(discountNote);
-        discountedPriceTv.setText("$"+discountPrice);
-        originalPriceTv.setText("$"+originalPrice);
+        discountedPriceTv.setText("Rs."+discountPrice);
+        originalPriceTv.setText("Rs."+originalPrice);
 
         if (discountAvailable.equals("true")){
             //product is on discount
@@ -220,7 +221,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               //dismiss bottom sheet
+                //dismiss bottom sheet
                 bottomSheetDialog.dismiss();
             }
         });
@@ -228,22 +229,25 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
     private void deleteProduct(String id){
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        reference.child(firebaseAuth.getUid()).child("Products").child(id).removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //product deleted
-                        Toast.makeText(context, "Product deleted...", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                         //failed to product delete
-                        Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null){
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+            reference.child(user.getUid()).child("Products").child(id).removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            //product deleted
+                            Toast.makeText(context, "Product deleted...", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //failed to product delete
+                            Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
 
     }
 
@@ -260,7 +264,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         return filter;
     }
 
-    class HolderProductSeller extends RecyclerView.ViewHolder{
+    static class HolderProductSeller extends RecyclerView.ViewHolder{
         //holds views of recycler view
         private ImageView productIconIv;
         private TextView discountedNoteTv, titleTv, quantityTv, discountedPriceTv, originalPriceTv;

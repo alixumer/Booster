@@ -22,6 +22,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -32,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.boosterfueldeliveryservices.FilterEmoji;
 import com.boosterfueldeliveryservices.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,11 +52,11 @@ import java.util.Locale;
 
 public class RegisterUserActivity extends AppCompatActivity implements LocationListener {
 
-    private ImageButton backBtn, gpsBtn;
+    private ImageButton backBtn;
     private ImageView profileIv;
     private EditText nameEt, phoneEt, countryEt, stateEt, cityEt, addressEt, emailEt, passwordEt, cPasswordEt;
     private Button registerBtn;
-    private TextView registerSellerTv;
+    private TextView registerSellerTv, getLocationTv;
 
     //permission constants
     private static final int LOCATION_REQUEST_CODE = 100;
@@ -85,15 +87,20 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
         setContentView(R.layout.activity_register_user);
 
         backBtn = findViewById(R.id.backBtn);
-        gpsBtn = findViewById(R.id.gpsBtn);
+        getLocationTv = findViewById(R.id.getLocationTv);
         profileIv = findViewById(R.id.profileIv);
 
         nameEt = findViewById(R.id.nameEt);
+        nameEt.setFilters(new InputFilter[] {new FilterEmoji()});
         phoneEt = findViewById(R.id.phoneEt);
         countryEt = findViewById(R.id.countryEt);
+        countryEt.setFilters(new InputFilter[] {new FilterEmoji()});
         stateEt = findViewById(R.id.stateEt);
+        stateEt.setFilters(new InputFilter[] {new FilterEmoji()});
         cityEt = findViewById(R.id.cityEt);
+        cityEt.setFilters(new InputFilter[] {new FilterEmoji()});
         addressEt = findViewById(R.id.addressEt);
+        addressEt.setFilters(new InputFilter[] {new FilterEmoji()});
         emailEt = findViewById(R.id.emailEt);
         passwordEt = findViewById(R.id.passwordEt);
         cPasswordEt = findViewById(R.id.cPasswordEt);
@@ -124,7 +131,7 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
             }
         });
 
-        gpsBtn.setOnClickListener(new View.OnClickListener() {
+        getLocationTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //get current location
@@ -165,7 +172,8 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
     }
 
     private String fullName, phoneNumber, country, state, city, address, email, password, confirmPassword;
-    private void inputData(){
+
+    private void inputData() {
         //input data
         fullName = nameEt.getText().toString().trim();
         phoneNumber = phoneEt.getText().toString().trim();
@@ -178,13 +186,13 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
         confirmPassword = cPasswordEt.getText().toString().trim();
 
         //validating data
-        if (TextUtils.isEmpty(fullName)){
-            Toast.makeText(this,"Enter Name", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(fullName)) {
+            Toast.makeText(this, "Enter Name", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (TextUtils.isEmpty(phoneNumber)){
-            Toast.makeText(this,"Enter phone number", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(phoneNumber)) {
+            Toast.makeText(this, "Enter phone number", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -193,30 +201,30 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
 //            return;
 //        }
 
-        if (TextUtils.isEmpty(state)){
-            Toast.makeText(this,"Enter state", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(state)) {
+            Toast.makeText(this, "Enter state", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (TextUtils.isEmpty(city)){
-            Toast.makeText(this,"Enter city", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(city)) {
+            Toast.makeText(this, "Enter city", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            Toast.makeText(this,"Invalid email Address", Toast.LENGTH_SHORT).show();
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Invalid email Address", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (!password.equals(confirmPassword) ){
-            Toast.makeText(this,"Passwords does not match", Toast.LENGTH_SHORT).show();
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Passwords does not match", Toast.LENGTH_SHORT).show();
             return;
         }
 
         createAccount();
     }
 
-    private void createAccount(){
+    private void createAccount() {
         progressDialog.setMessage("Creating account...");
         progressDialog.show();
 
@@ -234,34 +242,34 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
                     public void onFailure(@NonNull Exception e) {
                         //failed account creation
                         progressDialog.dismiss();
-                        Toast.makeText(RegisterUserActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterUserActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     private void saverFirebaseData() {
         progressDialog.setMessage("Saving account info...");
-        final String timeStamp = ""+System.currentTimeMillis();
+        final String timeStamp = "" + System.currentTimeMillis();
 
-        if (image_uri == null){
+        if (image_uri == null) {
             //save info without image
 
             //setup data to save
             HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("uid", ""+firebaseAuth.getUid());
-            hashMap.put("email",""+email);
-            hashMap.put("name",""+fullName);
-            hashMap.put("phone",""+phoneNumber);
-            hashMap.put("country",""+country);
-            hashMap.put("state",""+state);
-            hashMap.put("city",""+city);
-            hashMap.put("address",""+address);
-            hashMap.put("latitude",""+latitude);
-            hashMap.put("longitude",""+longitude);
-            hashMap.put("timestamp",""+timeStamp);
-            hashMap.put("accountType","User");
-            hashMap.put("online","true");
-            hashMap.put("profileImage","");
+            hashMap.put("uid", "" + firebaseAuth.getUid());
+            hashMap.put("email", "" + email);
+            hashMap.put("name", "" + fullName);
+            hashMap.put("phone", "" + phoneNumber);
+            hashMap.put("country", "" + country);
+            hashMap.put("state", "" + state);
+            hashMap.put("city", "" + city);
+            hashMap.put("address", "" + address);
+            hashMap.put("latitude", "" + latitude);
+            hashMap.put("longitude", "" + longitude);
+            hashMap.put("timestamp", "" + timeStamp);
+            hashMap.put("accountType", "User");
+            hashMap.put("online", "true");
+            hashMap.put("profileImage", "");
 
             //save to db
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
@@ -279,16 +287,15 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
                 public void onFailure(@NonNull Exception e) {
                     //failed db update
                     progressDialog.dismiss();
-                    startActivity(new Intent(RegisterUserActivity.this,MainUserActivity.class));
+                    startActivity(new Intent(RegisterUserActivity.this, MainUserActivity.class));
                     finish();
                 }
             });
-        }
-        else{
+        } else {
             //save info with image
 
             //name and the path of the image
-            String filePathAndName = "profile_images/"+ ""+firebaseAuth.getUid();
+            String filePathAndName = "profile_images/" + "" + firebaseAuth.getUid();
             //upload image
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
             storageReference.putFile(image_uri)
@@ -297,26 +304,26 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //get url of the upload image
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while(!uriTask.isSuccessful());
+                            while (!uriTask.isSuccessful()) ;
                             Uri downloadImageUri = uriTask.getResult();
 
-                            if (uriTask.isSuccessful()){
+                            if (uriTask.isSuccessful()) {
                                 //setup data to save
                                 HashMap<String, Object> hashMap = new HashMap<>();
-                                hashMap.put("uid", ""+firebaseAuth.getUid());
-                                hashMap.put("email",""+email);
-                                hashMap.put("name",""+fullName);
-                                hashMap.put("phone",""+phoneNumber);
-                                hashMap.put("country",""+country);
-                                hashMap.put("state",""+state);
-                                hashMap.put("city",""+city);
-                                hashMap.put("address",""+address);
-                                hashMap.put("latitude",""+latitude);
-                                hashMap.put("longitude",""+longitude);
-                                hashMap.put("timestamp",""+timeStamp);
-                                hashMap.put("accountType","User");
-                                hashMap.put("online","true");
-                                hashMap.put("profileImage",""+downloadImageUri); //url of the updated image
+                                hashMap.put("uid", "" + firebaseAuth.getUid());
+                                hashMap.put("email", "" + email);
+                                hashMap.put("name", "" + fullName);
+                                hashMap.put("phone", "" + phoneNumber);
+                                hashMap.put("country", "" + country);
+                                hashMap.put("state", "" + state);
+                                hashMap.put("city", "" + city);
+                                hashMap.put("address", "" + address);
+                                hashMap.put("latitude", "" + latitude);
+                                hashMap.put("longitude", "" + longitude);
+                                hashMap.put("timestamp", "" + timeStamp);
+                                hashMap.put("accountType", "User");
+                                hashMap.put("online", "true");
+                                hashMap.put("profileImage", "" + downloadImageUri); //url of the updated image
 
                                 //save to db
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
@@ -326,7 +333,7 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
                                             public void onSuccess(Void aVoid) {
                                                 //db updated
                                                 progressDialog.dismiss();
-                                                startActivity(new Intent(RegisterUserActivity.this,MainUserActivity.class));
+                                                startActivity(new Intent(RegisterUserActivity.this, MainUserActivity.class));
                                                 finish();
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
@@ -334,7 +341,7 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
                                     public void onFailure(@NonNull Exception e) {
                                         //failed db update
                                         progressDialog.dismiss();
-                                        startActivity(new Intent(RegisterUserActivity.this,MainUserActivity.class));
+                                        startActivity(new Intent(RegisterUserActivity.this, MainUserActivity.class));
                                         finish();
                                     }
                                 });
@@ -345,7 +352,7 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(RegisterUserActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterUserActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -407,6 +414,16 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
         Toast.makeText(this, "Please wait....", Toast.LENGTH_LONG).show();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 

@@ -199,7 +199,7 @@ public class MainSellerActivity extends AppCompatActivity {
                         .setItems(options, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                           //handle click items
+                                //handle click items
                                 if (i == 0){
                                     //all checked
                                     filteredOrdersTv.setText("Showing All Orders");
@@ -245,18 +245,18 @@ public class MainSellerActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                       //clear list before adding new data in it
-                       orderShopArrayList.clear();
+                        //clear list before adding new data in it
+                        orderShopArrayList.clear();
 
-                       for (DataSnapshot ds: snapshot.getChildren()){
-                           ModelOrderShop modelOrderShop = ds.getValue(ModelOrderShop.class);
+                        for (DataSnapshot ds: snapshot.getChildren()){
+                            ModelOrderShop modelOrderShop = ds.getValue(ModelOrderShop.class);
 
-                           //add to list
-                           orderShopArrayList.add(modelOrderShop);
-                       }
-                       //setup adapter
+                            //add to list
+                            orderShopArrayList.add(modelOrderShop);
+                        }
+                        //setup adapter
                         adapterOrderShop = new AdapterOrderShop(MainSellerActivity.this, orderShopArrayList);
-                       //set adapter to recycler view
+                        //set adapter to recycler view
                         ordersRv.setAdapter(adapterOrderShop);
                     }
 
@@ -276,12 +276,12 @@ public class MainSellerActivity extends AppCompatActivity {
         //get all products
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.child(firebaseAuth.getUid()).child("Products")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //before getting reset list
                         productList.clear();
-                        for (DataSnapshot ds: dataSnapshot.getChildren()){
+                        for (DataSnapshot ds: snapshot.getChildren()){
                             ModelProduct modelProduct = ds.getValue(ModelProduct.class);
                             productList.add(modelProduct);
                         }
@@ -305,12 +305,12 @@ public class MainSellerActivity extends AppCompatActivity {
         //get all products
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.child(firebaseAuth.getUid()).child("Products")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //before getting reset list
                         productList.clear();
-                        for (DataSnapshot ds: dataSnapshot.getChildren()){
+                        for (DataSnapshot ds: snapshot.getChildren()){
 
                             String productCategory = ""+ds.child("productCategory").getValue();
 
@@ -340,11 +340,11 @@ public class MainSellerActivity extends AppCompatActivity {
         productsRl.setVisibility(View.VISIBLE);
         ordersRl.setVisibility(View.GONE);
 
-        tabProductsTv.setTextColor(getResources().getColor(R.color.colorBlack));
+        tabProductsTv.setTextColor(getResources().getColor(R.color.colorWhite));
         tabProductsTv.setBackgroundResource(R.drawable.shape_rect04);
 
-        tabOrdersTv.setTextColor(getResources().getColor(R.color.colorWhite));
-        tabOrdersTv.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        tabOrdersTv.setTextColor(getResources().getColor(R.color.colorBlack));
+        tabOrdersTv.setBackgroundColor(getResources().getColor(android.R.color.white));
     }
 
     private void showOrdersUI() {
@@ -352,10 +352,10 @@ public class MainSellerActivity extends AppCompatActivity {
         productsRl.setVisibility(View.GONE);
         ordersRl.setVisibility(View.VISIBLE);
 
-        tabProductsTv.setTextColor(getResources().getColor(R.color.colorWhite));
-        tabProductsTv.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        tabProductsTv.setTextColor(getResources().getColor(R.color.colorBlack));
+        tabProductsTv.setBackgroundColor(getResources().getColor(android.R.color.white));
 
-        tabOrdersTv.setTextColor(getResources().getColor(R.color.colorBlack));
+        tabOrdersTv.setTextColor(getResources().getColor(android.R.color.white));
         tabOrdersTv.setBackgroundResource(R.drawable.shape_rect04);
     }
 
@@ -400,10 +400,10 @@ public class MainSellerActivity extends AppCompatActivity {
     private void loadMyInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.orderByChild("uid").equalTo(firebaseAuth.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot ds: dataSnapshot.getChildren() ){
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds: snapshot.getChildren() ){
 
                             String name = ""+ds.child("name").getValue();
                             String accountType = ""+ds.child("accountType").getValue();

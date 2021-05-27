@@ -19,3 +19,34 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+    # Add this global rule
+    -keepattributes Signature
+
+    # This rule will properly ProGuard all the model classes in
+    # the package com.yourcompany.models.
+    # Modify this rule to fit the structure of your app.
+    -keepclassmembers class com.boosterfueldeliveryservices.models.ModelShop {
+      *;
+    }
+    -keepclassmembers class com.boosterfueldeliveryservices.models.ModelProduct {
+          *;
+        }
+        -keepclassmembers class com.boosterfueldeliveryservices.models.ModelCartItem {
+              *;
+            }
+            -keepclassmembers class com.boosterfueldeliveryservices.models.ModelOrderedItem {
+                  *;
+                }
+
+                -keepclassmembers class com.boosterfueldeliveryservices.models.ModelOrderShop {
+                      *;
+                    }
+
+-keepclassmembers class com.boosterfueldeliveryservices.models.ModelOrderUser {
+      *;
+    }
+
+    -keepclassmembers class com.boosterfueldeliveryservices.models.ModelReview {
+          *;
+        }

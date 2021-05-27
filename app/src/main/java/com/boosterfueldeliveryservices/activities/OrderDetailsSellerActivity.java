@@ -170,7 +170,6 @@ public class OrderDetailsSellerActivity extends AppCompatActivity {
                         String orderStatus = ""+snapshot.child("orderStatus").getValue();
                         String orderTime = ""+snapshot.child("orderTime").getValue();
                         String orderTo = ""+snapshot.child("orderTo").getValue();
-                        String deliveryFee = ""+snapshot.child("deliveryFee").getValue();
                         String latitude = ""+snapshot.child("latitude").getValue();
                         String longitude = ""+snapshot.child("longitude").getValue();
 
@@ -193,7 +192,7 @@ public class OrderDetailsSellerActivity extends AppCompatActivity {
                         //set data
                         orderIdTv.setText(orderId);
                         orderStatusTv.setText(orderStatus);
-                        amountTv.setText("$"+orderCost + "[Including delivery fee $"+deliveryFee+"]");
+                        amountTv.setText(""+orderCost + "[Including delivery fee]");
                         dateTv.setText(dateFormated);
 
                         findAddress(latitude, longitude);
@@ -234,7 +233,7 @@ public class OrderDetailsSellerActivity extends AppCompatActivity {
         orderedItemArrayList = new ArrayList<>();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-        ref.child(firebaseAuth.getUid()).child("Orders").child("orderId").child("items")
+        ref.child(firebaseAuth.getUid()).child("Orders").child(orderId).child("Items")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

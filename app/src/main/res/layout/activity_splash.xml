@@ -4,14 +4,290 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
     tools:context=".activities.SplashActivity">
 
-    <ImageView
-        android:id="@+id/iconIv"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:src="@drawable/fuel"
-        android:layout_centerInParent="true"/>
+    <LinearLayout
+        android:id="@+id/logoLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B"
+            android:textSize="80sp"
+            android:fontFamily="@font/nerkoone_regular"
+            android:textColor="@color/colorBlack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="oo"
+            android:textSize="60sp"
+            android:fontFamily="@font/nerkoone_regular"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ster"
+            android:textSize="60sp"
+            android:fontFamily="@font/nerkoone_regular"
+            android:textColor="@color/colorBlack"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/descriptionTv"
+        android:layout_below="@+id/logoLl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy And Sell👍"
+        android:textColor="@color/colorGray02"
+        android:textSize="17sp"
+        android:textStyle="italic"
+        android:layout_centerHorizontal="true"/>
+
+   <RelativeLayout
+       android:id="@+id/firstRl"
+       android:layout_below="@+id/descriptionTv"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="30dp"
+       android:layout_marginStart="20dp"
+       android:paddingStart="10dp"
+       android:paddingEnd="10dp"
+       android:paddingTop="10dp"
+       android:paddingBottom="10dp">
+
+       <ImageView
+           android:id="@+id/firstIv"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:src="@drawable/ic_petrol_pump_black"
+           android:background="@null"
+           android:layout_centerVertical="true"/>
+
+       <LinearLayout
+           android:layout_toEndOf="@+id/firstIv"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:paddingStart="13dp"
+           android:layout_centerVertical="true">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Fuel Delivery"
+               android:textSize="18sp"
+               android:textColor="@color/colorPrimary"
+               android:fontFamily="@font/muli_bold"/>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Get your fuel delivered, anytime, anywhere"
+               android:textColor="@color/colorGray02"/>
+
+       </LinearLayout>
+
+
+   </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/secondRl"
+        android:layout_below="@+id/firstRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/secondIv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_engine_oil_black"
+            android:background="@null"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_toEndOf="@+id/secondIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="13dp"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Engine Oil Change"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/muli_bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobil motor oil with 10 point check"
+                android:textColor="@color/colorGray02"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/thirdRl"
+        android:layout_below="@+id/secondRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/thirdIv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_racing_black"
+            android:background="@null"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_toEndOf="@+id/thirdIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="13dp"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tyre Change"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/muli_bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get new tyre for your car"
+                android:textColor="@color/colorGray02"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/frthRl"
+        android:layout_below="@+id/thirdRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/frthIv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_car_battery_black"
+            android:background="@null"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_toEndOf="@+id/frthIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="13dp"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Battery Change"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/muli_bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change battery anywhere in and out"
+                android:textColor="@color/colorGray02"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fifthRl"
+        android:layout_below="@+id/frthRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/fifthIv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_car_lifter_black"
+            android:background="@null"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_toEndOf="@+id/fifthIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="13dp"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car Wash"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/muli_bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get your car cleaned by experts in"
+                android:textColor="@color/colorGray02"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/splashPb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:outlineSpotShadowColor="@color/colorGreen"
+        android:outlineAmbientShadowColor="@color/colorPrimaryDark"/>
 
 </RelativeLayout>

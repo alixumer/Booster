@@ -22,6 +22,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -32,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.boosterfueldeliveryservices.FilterEmoji;
 import com.boosterfueldeliveryservices.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,7 +57,7 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
     private EditText nameEt, shopNameEt, phoneEt, deliveryFeeEt, countryEt,
             stateEt, cityEt, addressEt, emailEt, passwordEt, cPasswordEt;
     private Button registerBtn;
-    private TextView registerSellerTv;
+    private TextView getLocationTv;
 
     //permission constants
     private static final int LOCATION_REQUEST_CODE = 100;
@@ -85,22 +87,26 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
         setContentView(R.layout.activity_register_seller);
 
         backBtn = findViewById(R.id.backBtn);
-        gpsBtn = findViewById(R.id.gpsBtn);
         profileIv = findViewById(R.id.profileIv);
 
         nameEt = findViewById(R.id.nameEt);
+        nameEt.setFilters(new InputFilter[] {new FilterEmoji()});
         shopNameEt = findViewById(R.id.shopNameEt);
         phoneEt = findViewById(R.id.phoneEt);
         deliveryFeeEt = findViewById(R.id.deliveryFeeEt);
         countryEt = findViewById(R.id.countryEt);
+        countryEt.setFilters(new InputFilter[] {new FilterEmoji()});
         stateEt = findViewById(R.id.stateEt);
+        stateEt.setFilters(new InputFilter[] {new FilterEmoji()});
         cityEt = findViewById(R.id.cityEt);
+        cityEt.setFilters(new InputFilter[] {new FilterEmoji()});
         addressEt = findViewById(R.id.addressEt);
+        addressEt.setFilters(new InputFilter[] {new FilterEmoji()});
         emailEt = findViewById(R.id.emailEt);
         passwordEt = findViewById(R.id.passwordEt);
         cPasswordEt = findViewById(R.id.cPasswordEt);
         registerBtn = findViewById(R.id.registerBtn);
-        registerSellerTv = findViewById(R.id.registerSellerTv);
+        getLocationTv = findViewById(R.id.getLocationTv);
 
         //init location
         locationPermissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
@@ -112,8 +118,15 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
 
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
-        gpsBtn.setOnClickListener(new View.OnClickListener() {
+
+        getLocationTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //get current location
@@ -406,7 +419,7 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
         Toast.makeText(this, "Please wait....", Toast.LENGTH_LONG).show();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
 
     private void findAddress() {

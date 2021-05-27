@@ -76,14 +76,14 @@ public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.Holder
                 notifyItemChanged(position);
                 notifyDataSetChanged();
 
-                double tx = Double.parseDouble((((ShopDetailsActivity)context).allTotalPriceTv.getText().toString().trim().replace("$", "")));
-                double totalPrice = tx - Double.parseDouble(cost.replace("$", ""));
+                double tx = Double.parseDouble((((ShopDetailsActivity)context).allTotalPriceTv.getText().toString().trim().replace("Rs.", "")));
+                double totalPrice = tx - Double.parseDouble(cost.replace("Rs.", ""));
 
-                double deliveryFee = Double.parseDouble((((ShopDetailsActivity)context).deliveryFee.replace("$", "")));
-                double sTotalPrice = Double.parseDouble(String.format("$.2f", totalPrice)) - Double.parseDouble(String.format("$.2f", deliveryFee));
+                double deliveryFee = Double.parseDouble((((ShopDetailsActivity)context).deliveryFee.replace("Rs.", "")));
+                double sTotalPrice = Double.parseDouble(String.format("%.2f", totalPrice)) - Double.parseDouble(String.format("%.2f", deliveryFee));
                 ((ShopDetailsActivity)context).allTotalPrice = 0.00;
-                ((ShopDetailsActivity)context).sTotalTv.setText("$"+String.format("%.2f", sTotalPrice));
-                ((ShopDetailsActivity)context).allTotalPriceTv.setText("$"+String.format("%.2f", Double.parseDouble(String.format("%.2f", totalPrice))));
+                ((ShopDetailsActivity)context).sTotalTv.setText("Rs."+String.format("%.2f", sTotalPrice));
+                ((ShopDetailsActivity)context).allTotalPriceTv.setText("Rs."+String.format("%.2f", Double.parseDouble(String.format("%.2f", totalPrice))));
 
 
                 //after removing item from cart, update cart count
@@ -99,7 +99,7 @@ public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.Holder
     }
 
     //view holder class
-    class HolderCartItem extends RecyclerView.ViewHolder{
+    static class HolderCartItem extends RecyclerView.ViewHolder{
 
         //ui views of row_cartitems.xml
         private TextView itemTitleTv, itemPriceTv, itemPriceEachTv, itemQuantityTv, itemRemoveTv;

@@ -9,26 +9,29 @@
 
     <!--Toolbar-->
     <RelativeLayout
+        android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:padding="10dp"
         android:background="@drawable/shape_rect01">
 
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:src="@drawable/ic_back_white"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@null"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Edit Product"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:layout_centerVertical="true"
+            android:text="Update Service"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/muli"/>
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back_white"/>
 
     </RelativeLayout>
 

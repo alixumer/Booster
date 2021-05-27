@@ -4,62 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.RegisterSellerActivity">
+    tools:context=".activities.RegisterSellerActivity"
+    android:background="@color/kBackgroundColor">
 
     <RelativeLayout
+        android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="12dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
         android:background="@drawable/shape_rect01">
-
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_back_white"
-            android:background="@null"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Register Seller"
-            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:text="Seller Registration"
             android:textSize="20sp"
-            android:textColor="@color/colorWhite"
-            />
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/muli"/>
 
         <ImageButton
-            android:id="@+id/gpsBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_gps_white"
-            android:layout_alignParentEnd="true"
-            android:background="@null"/>
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back_white"/>
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/iconIv"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/shape_circle01"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/ic_key_white"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp"
+    <TextView
+        android:id="@+id/welcomeTv"
+        android:layout_below="@id/toolbarRl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register Account"
+        android:textSize="30sp"
+        android:fontFamily="@font/muli_bold"
+        android:textColor="@color/colorBlack"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/welcome2Tv"
+        android:layout_below="@id/welcomeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complete your details"
+        android:fontFamily="@font/muli"
+        android:textColor="@color/colorGray02"
+        android:layout_centerHorizontal="true"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iconIv"
-        >
+        android:fadingEdge="none"
+        android:fillViewport="true"
+        android:layout_below="@id/welcome2Tv">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
             <com.blogspot.atifsoftwares.circularimageview.CircularImageView
                 android:id="@+id/profileIv"
@@ -69,173 +76,247 @@
                 app:c_border="true"
                 app:c_border_color="@color/colorPrimary"
                 app:c_border_width="1dp"
-                android:src="@drawable/ic_person_gray"/>
+                android:src="@drawable/ic_store"/>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_below="@id/profileIv"
-                android:id="@+id/nameEt"
+                android:id="@+id/nameTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
-                android:padding="12dp"
-                android:drawablePadding="5dp"
-                android:drawableEnd="@drawable/ic_person_gray"
-                android:layout_margin="5dp"
-                android:inputType="textPersonName|textCapWords"
-                android:background="@drawable/shape_rect02"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
 
-            <EditText
-                android:layout_below="@id/nameEt"
-                android:id="@+id/shopNameEt"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:drawableEnd="@drawable/ic_user"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@id/nameTil"
+                android:id="@+id/shopNameTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Shop Name"
-                android:padding="12dp"
-                android:drawablePadding="5dp"
-                android:drawableEnd="@drawable/ic_store_gray"
-                android:layout_margin="5dp"
-                android:inputType="textPersonName|textCapWords"
-                android:background="@drawable/shape_rect02"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
 
-            <EditText
-                android:layout_below="@id/shopNameEt"
-                android:id="@+id/phoneEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Phone"
-                android:padding="12dp"
-                android:drawablePadding="5dp"
-                android:drawableEnd="@drawable/ic_phone_gray"
-                android:layout_margin="5dp"
-                android:inputType="phone"
-                android:background="@drawable/shape_rect02"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shopNameEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:drawableEnd="@drawable/ic_shop"/>
 
-            <EditText
-                android:layout_below="@id/phoneEt"
-                android:id="@+id/deliveryFeeEt"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@id/shopNameTil"
+                android:id="@+id/deliveryFeeTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Delivery Fee"
-                android:padding="12dp"
-                android:drawablePadding="5dp"
-                android:drawableEnd="@drawable/ic_local_shipping_gray"
-                android:layout_margin="5dp"
-                android:inputType="numberDecimal"
-                android:background="@drawable/shape_rect02"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/deliveryFeeEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:drawableEnd="@drawable/ic_shop"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
+                android:layout_below="@id/deliveryFeeTil"
                 android:id="@+id/addressLl"
-                android:layout_below="@id/deliveryFeeEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
 
-                <EditText
-                    android:layout_below="@id/nameEt"
-                    android:id="@+id/countryEt"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/countryTil"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:hint="Country"
-                    android:padding="12dp"
-                    android:drawablePadding="5dp"
-                    android:drawableEnd="@drawable/ic_location_gray"
-                    android:layout_margin="5dp"
-                    android:inputType="textPostalAddress"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_rect02"/>
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp">
 
-                <EditText
-                    android:layout_below="@id/nameEt"
-                    android:id="@+id/stateEt"
-                    android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/countryEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords"
+                        android:drawableEnd="@drawable/ic_home_map"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/stateTil"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:hint="State"
-                    android:padding="12dp"
-                    android:drawablePadding="5dp"
-                    android:drawableEnd="@drawable/ic_location_gray"
-                    android:layout_margin="5dp"
-                    android:inputType="textPostalAddress"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_rect02"/>
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp">
 
-                <EditText
-                    android:layout_below="@id/nameEt"
-                    android:id="@+id/cityEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="City"
-                    android:padding="12dp"
-                    android:drawablePadding="5dp"
-                    android:drawableEnd="@drawable/ic_location_gray"
-                    android:layout_margin="5dp"
-                    android:inputType="textPostalAddress"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_rect02"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/stateEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords"
+                        android:drawableEnd="@drawable/ic_home_map"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
-            <EditText
-                android:layout_below="@id/addressLl"
-                android:id="@+id/addressEt"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@+id/addressLl"
+                android:id="@+id/cityTil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="City"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cityEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:drawableEnd="@drawable/ic_home"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@id/cityTil"
+                android:id="@+id/addressTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Complete Address"
-                android:padding="12dp"
-                android:drawablePadding="5dp"
-                android:drawableEnd="@drawable/ic_location_gray"
-                android:layout_margin="5dp"
-                android:inputType="textPostalAddress|textMultiLine"
-                android:background="@drawable/shape_rect02"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
 
-            <EditText
-                android:layout_below="@id/addressEt"
-                android:id="@+id/emailEt"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addressEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:drawableEnd="@drawable/ic_home"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_below="@+id/addressTil"
+                android:id="@+id/getLocationTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get my location"
+                android:textSize="16sp"
+                android:textColor="@color/colorGreen"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@id/getLocationTv"
+                android:id="@+id/phoneTil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_phone"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@id/phoneTil"
+                android:id="@+id/emailTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:padding="12dp"
-                android:drawablePadding="5dp"
-                android:drawableEnd="@drawable/ic_mail_gray"
-                android:layout_margin="5dp"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/shape_rect02"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
 
-            <EditText
-                android:id="@+id/passwordEt"
-                android:layout_below="@id/emailEt"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:drawableEnd="@drawable/ic_mail"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@id/emailTil"
+                android:id="@+id/passwordTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
-                android:padding="12dp"
-                android:drawablePadding="5dp"
-                android:drawableEnd="@drawable/ic_lock_gray"
-                android:layout_margin="5dp"
-                android:inputType="textPassword"
-                android:background="@drawable/shape_rect02"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
 
-            <EditText
-                android:id="@+id/cPasswordEt"
-                android:layout_below="@id/passwordEt"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:drawableEnd="@drawable/ic_lock"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@id/passwordTil"
+                android:id="@+id/cPasswordTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirm Password"
-                android:padding="12dp"
-                android:drawablePadding="5dp"
-                android:drawableEnd="@drawable/ic_lock_gray"
-                android:layout_margin="5dp"
-                android:inputType="textPassword"
-                android:background="@drawable/shape_rect02"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cPasswordEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:drawableEnd="@drawable/ic_lock"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/registerBtn"
-                android:text="Register"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:minWidth="120dp"
+                android:text="Register Account"
                 android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cPasswordEt"
-                />
+                android:layout_below="@id/cPasswordTil"
+                android:background="@drawable/default_btn"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"/>
 
         </RelativeLayout>
 

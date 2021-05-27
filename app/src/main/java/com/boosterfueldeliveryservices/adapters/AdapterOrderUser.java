@@ -56,7 +56,7 @@ public class AdapterOrderUser extends RecyclerView.Adapter<AdapterOrderUser.Hold
         loadShopInfo(modelOrderUser, holder);
 
         //set order
-        holder.amountTv.setText("Amount: $"+orderCost);
+        holder.amountTv.setText("Amount: Rs."+orderCost);
         holder.statusTv.setText(orderStatus);
         holder.orderIdIv.setText("OrderId:"+orderId);
 
@@ -113,7 +113,7 @@ public class AdapterOrderUser extends RecyclerView.Adapter<AdapterOrderUser.Hold
     }
 
     //view holder class
-    class  HolderOrderUser extends RecyclerView.ViewHolder{
+    static class  HolderOrderUser extends RecyclerView.ViewHolder{
 
         //views of layout
         private TextView orderIdIv, dateTv, shopNameTv, amountTv, statusTv;

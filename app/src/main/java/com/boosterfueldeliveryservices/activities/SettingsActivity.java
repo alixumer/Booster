@@ -22,7 +22,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class SettingsActivity extends AppCompatActivity {
 
     //ui views
-    SwitchCompat fcmSwitch;
+    private SwitchCompat fcmSwitch;
     private TextView notificationStatusTv;
     private ImageButton backBtn;
 

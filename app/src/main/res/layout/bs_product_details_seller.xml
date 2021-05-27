@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:background="@drawable/shape_rect01"
         android:padding="10dp">
 
@@ -20,14 +20,14 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@null"
-            android:src="@drawable/ic_back_white"/>
+            android:src="@drawable/ic_back"/>
 
         <ImageButton
             android:id="@+id/deleteBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@null"
-            android:src="@drawable/ic_delete_white"
+            android:src="@drawable/ic_trash"
             android:layout_alignParentEnd="true"
             />
 
@@ -36,7 +36,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@null"
-            android:src="@drawable/ic_edit_white"
+            android:src="@drawable/ic_edit"
             android:layout_toStartOf="@id/deleteBtn"/>
 
         <TextView
@@ -44,10 +44,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Product Details"
+            android:text="Service Details"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/muli_bold"/>
 
     </RelativeLayout>
 
@@ -57,10 +58,10 @@
         android:layout_height="120dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@null"
         android:padding="5dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/ic_add_shopping_white"/>
+        android:src="@drawable/ic_add_product"/>
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,7 +90,8 @@
             android:textSize="18sp"
             android:text="The Product Title"
             android:paddingEnd="5dp"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/muli_bold"/>
 
         <TextView
             android:id="@+id/descriptionTv"
@@ -97,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="The Product Description"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
             android:id="@+id/categoryTv"
@@ -105,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Category"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
             android:id="@+id/quantityTv"
@@ -113,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Quantity"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorPrimaryDark"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -125,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:text="$10"
+                android:text="Rs.10"
                 android:textColor="@color/colorGray02"/>
 
             <TextView
@@ -133,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/discountedPriceTv"
-                android:text="$15"
+                android:text="Rs.15"
                 android:textColor="@color/colorGray02"/>
 
 

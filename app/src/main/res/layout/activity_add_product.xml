@@ -9,32 +9,40 @@
 
     <!--Toolbar-->
     <RelativeLayout
+        android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:padding="10dp"
         android:background="@drawable/shape_rect01">
 
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:src="@drawable/ic_back_white"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@null"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Add Product"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:layout_centerVertical="true"
+            android:text="Add Service"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/muli"/>
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back_white"/>
 
     </RelativeLayout>
-    
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="none"
+        android:fillViewport="true">
     <!--Form to input to data-->
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
@@ -42,39 +50,53 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_add_shopping_primary"
             app:c_border="true"
-            app:c_border_color="@color/colorPrimaryDark"
-            app:c_border_width="1dp"/>
+            app:c_border_color="@color/colorPrimary"
+            app:c_border_width="1dp"
+            android:src="@drawable/ic_add_product"
+            android:layout_marginTop="20dp"/>
 
-        <EditText
-            android:id="@+id/titleEt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@id/productIconIv"
+            android:id="@+id/titleTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:hint="Title"
-            android:padding="12dp"
-            android:background="@drawable/shape_rect02"
-            android:drawableStart="@drawable/ic_text_gray"
-            android:drawablePadding="10dp"
-            android:inputType="textPersonName|textCapWords"
-            android:layout_below="@id/productIconIv"/>
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
 
-        <EditText
-            android:id="@+id/descriptionEt"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName|textCapWords"
+                android:drawableEnd="@drawable/ic_title"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@id/titleTil"
+            android:id="@+id/descriptionTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:hint="Description"
-            android:padding="12dp"
-            android:background="@drawable/shape_rect02"
-            android:drawableStart="@drawable/ic_text_gray"
-            android:drawablePadding="10dp"
-            android:inputType="textCapSentences|textMultiLine"
-            android:layout_below="@id/titleEt"/>
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptionEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName|textCapWords"
+                android:drawableEnd="@drawable/ic_title"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:layout_below="@id/descriptionTil"
             android:id="@+id/categoryTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,86 +104,114 @@
             android:padding="12dp"
             android:background="@drawable/shape_rect02"
             android:hint="Categories"
-            android:drawableStart="@drawable/ic_categories_gray"
-            android:drawableEnd="@drawable/ic_arrow_drop_down_gray"
+            android:drawableStart="@drawable/ic_category"
+            android:drawableEnd="@drawable/ic_dropdown"
             android:drawablePadding="10dp"
-            android:inputType="textCapSentences|textMultiLine"
-            android:layout_below="@id/descriptionEt"/>
+            android:inputType="textCapSentences|textMultiLine"/>
 
-        <EditText
-            android:id="@+id/quantityEt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@id/categoryTv"
+            android:id="@+id/quantityTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="12dp"
-            android:background="@drawable/shape_rect02"
-            android:drawableStart="@drawable/ic_cart_gray"
-            android:hint="Quantity eg kg, g etc"
-            android:drawablePadding="10dp"
-            android:inputType="textCapWords"
-            android:layout_below="@id/categoryTv"/>
+            android:hint="Quantity eg 1 Litre"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
 
-        <EditText
-            android:id="@+id/priceEt"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/quantityEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName|textCapWords"
+                android:drawableEnd="@drawable/ic_quantity"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@id/quantityTil"
+            android:id="@+id/priceTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="12dp"
-            android:background="@drawable/shape_rect02"
-            android:drawableStart="@drawable/ic_cart_gray"
             android:hint="Price"
-            android:drawablePadding="10dp"
-            android:inputType="numberDecimal"
-            android:layout_below="@id/quantityEt"/>
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/priceEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:drawableEnd="@drawable/ic_price"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <!--Whether the product is on discount or not-->
         <androidx.appcompat.widget.SwitchCompat
+            android:layout_below="@id/priceTil"
             android:id="@+id/discountSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_below="@id/priceEt"
             android:text="Discount"/>
 
-        <EditText
-            android:id="@+id/discountedPriceEt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@id/discountSwitch"
+            android:id="@+id/discountedPriceTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="12dp"
-            android:background="@drawable/shape_rect02"
-            android:drawableStart="@drawable/ic_cart_gray"
             android:hint="Discount Price"
-            android:drawablePadding="10dp"
-            android:inputType="numberDecimal"
-            android:layout_below="@id/discountSwitch"/>
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/discountedPriceEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:drawableEnd="@drawable/ic_discount"/>
 
-        <EditText
-            android:id="@+id/discountedNoteEt"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@id/discountedPriceTil"
+            android:id="@+id/discountedNoteTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="12dp"
-            android:background="@drawable/shape_rect02"
-            android:drawableStart="@drawable/ic_cart_gray"
-            android:hint="Discount Note e.g. 10% off"
-            android:drawablePadding="10dp"
-            android:inputType="textCapSentences"
-            android:layout_below="@id/discountedPriceEt"/>
+            android:hint="Note eg 5% off"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/discountedNoteEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName|textCapWords"
+                android:drawableEnd="@drawable/ic_discount"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/addProductBtn"
-            android:text="Add Product"
-            android:layout_below="@id/discountedNoteEt"
+            android:text="Add"
             android:layout_centerHorizontal="true"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minWidth="150dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_below="@id/discountedNoteTil"
+            android:background="@drawable/default_btn"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:drawableStart="@drawable/ic_plus"
+            android:layout_marginBottom="12dp"/>
 
 
     </RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -17,7 +17,7 @@
             android:id="@+id/logoutBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_power_white"
+            android:src="@drawable/ic_log_out"
             android:layout_alignParentEnd="true"
             android:background="@null"/>
 
@@ -25,7 +25,7 @@
             android:id="@+id/editProfileBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_edit_white"
+            android:src="@drawable/ic_edit"
             android:layout_toStartOf="@id/logoutBtn"
             android:background="@null"/>
 
@@ -36,7 +36,7 @@
             android:id="@+id/addProductBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_add_shopping_white"
+            android:src="@drawable/ic_add_product"
             android:layout_toStartOf="@id/editProfileBtn"
             android:background="@null"/>
 
@@ -45,7 +45,7 @@
             android:id="@+id/reviewsBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_star_white"
+            android:src="@drawable/ic_star"
             android:layout_toStartOf="@id/addProductBtn"
             android:background="@null"/>
 
@@ -54,7 +54,7 @@
             android:id="@+id/settingsBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_settings_white"
+            android:src="@drawable/ic_settings"
             android:layout_toStartOf="@id/reviewsBtn"
             android:background="@null"/>
 
@@ -66,7 +66,7 @@
             android:layout_marginEnd="10dp"
             app:c_border="true"
             app:c_border_color="@color/colorWhite"
-            android:src="@drawable/ic_store_gray"/>
+            android:src="@drawable/ic_store"/>
 
         <TextView
             android:id="@+id/nameTv"
@@ -75,8 +75,7 @@
             android:text="Name"
             android:layout_toEndOf="@id/profileIv"
             android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            />
+            android:textColor="@color/colorBlack"/>
 
         <TextView
             android:id="@+id/shopNameTv"
@@ -85,7 +84,7 @@
             android:text="Shop Name"
             android:layout_toEndOf="@id/profileIv"
             android:layout_below="@+id/nameTv"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             />
 
         <TextView
@@ -95,7 +94,7 @@
             android:text="Email"
             android:layout_toEndOf="@id/profileIv"
             android:layout_below="@+id/shopNameTv"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             />
 
         <!--Tab: Products, Orders-->
@@ -116,7 +115,7 @@
         android:background="@drawable/shape_rect04"
        android:gravity="center"
        android:text="Products"
-       android:textColor="@color/colorBlack"/>
+       android:textColor="@color/colorWhite"/>
             
             <!--Orders-->
             <TextView
@@ -148,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/shape_rect02"
-            android:drawableStart="@drawable/ic_search_gray"
+            android:drawableStart="@drawable/ic_search"
             android:padding="10dp"
             android:layout_toStartOf="@id/filterProductBtn"
             android:drawablePadding="10dp"
@@ -164,7 +163,7 @@
             android:layout_marginEnd="5dp"
             android:background="@null"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_filter_gray"/>
+            android:src="@drawable/ic_filter"/>
 
         <!--show filtered product tv-->
         <TextView
@@ -202,7 +201,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_toStartOf="@id/filterOrderBtn"
-            android:background="@drawable/shape_rect02"
             android:padding="10dp"
             android:text="Showing All Orders"/>
 
@@ -216,7 +214,7 @@
             android:layout_marginEnd="5dp"
             android:background="@null"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_filter_gray"/>
+            android:src="@drawable/ic_filter"/>
 
         <!--show Orders-->
         <androidx.recyclerview.widget.RecyclerView

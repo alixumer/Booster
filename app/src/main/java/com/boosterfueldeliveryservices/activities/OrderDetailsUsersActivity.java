@@ -111,7 +111,7 @@ public class OrderDetailsUsersActivity extends AppCompatActivity {
                         itemsRv.setAdapter(adapterOrderedItem);
 
                         //set items count
-                        totalItemsTv.setText(""+snapshot.getChildren());
+                        totalItemsTv.setText(""+snapshot.getChildrenCount());
                     }
 
                     @Override
@@ -160,7 +160,7 @@ public class OrderDetailsUsersActivity extends AppCompatActivity {
                         //set data
                         orderIdTv.setText(orderId);
                         orderStatusTv.setText(orderStatus);
-                        amountTv.setText("$"+orderCost+ "[Including delivery fee $:"+deliveryFee+"]");
+                        amountTv.setText(""+orderCost+ "[Including delivery fee]");
                         dateTv.setText(formatedDate);
 
                         findAddress(latitude, longitude);

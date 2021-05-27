@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
 
 import com.boosterfueldeliveryservices.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,16 +21,20 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private ProgressBar splashPb;
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_splash);
 
+        splashPb = findViewById(R.id.splashPb);
         firebaseAuth = FirebaseAuth.getInstance();
 
         new Handler().postDelayed(new Runnable() {
@@ -44,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
 
             }
-        }, 1000);
+        }, 1900);
     }
 
     private void checkUserType() {

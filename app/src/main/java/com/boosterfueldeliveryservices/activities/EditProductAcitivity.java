@@ -44,6 +44,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class EditProductAcitivity extends AppCompatActivity {
 
@@ -55,6 +56,7 @@ public class EditProductAcitivity extends AppCompatActivity {
     private Button updateProductBtn;
 
     private String productId;
+    private String productIcon;
 
     //permission constants
     public static final int CAMERA_REQUEST_CODE = 200;
@@ -103,7 +105,8 @@ public class EditProductAcitivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        loadProductDetails();//to set on views
+
+            loadProductDetails();//to set on views
 
         //setup progress dialog
         progressDialog = new ProgressDialog(this);
@@ -170,61 +173,63 @@ public class EditProductAcitivity extends AppCompatActivity {
     }
 
     private void loadProductDetails() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        reference.child(firebaseAuth.getUid()).child("Products").child(productId)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //get data
-                        String productId = ""+snapshot.child("productId").getValue();
-                        String productTitle = ""+snapshot.child("productTitle").getValue();
-                        String productDescription = ""+snapshot.child("productDescription").getValue();
-                        String productCategory = ""+snapshot.child("productCategory").getValue();
-                        String productQuantity = ""+snapshot.child("productQuantity").getValue();
-                        String productIcon = ""+snapshot.child("productIcon").getValue();
-                        String originalPrice = ""+snapshot.child("originalPrice").getValue();
-                        String discountPrice = ""+snapshot.child("discountPrice").getValue();
-                        String discountNote = ""+snapshot.child("discountNote").getValue();
-                        String discountAvailable = ""+snapshot.child("discountAvailable").getValue();
-                        String timestamp = ""+snapshot.child("timestamp").getValue();
-                        String uid = ""+snapshot.child("uid").getValue();
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+            reference.child(firebaseAuth.getUid()).child("Products").child(productId)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            //get data
 
-                        //set data to views
-                        if (discountAvailable.equals("true")){
-                            discountSwitch.setChecked(true);
 
-                            discountedPriceEt.setVisibility(View.VISIBLE);
-                            discountedNoteEt.setVisibility(View.VISIBLE);
+                            String productId = ""+snapshot.child("productId").getValue();
+                            String productTitle = ""+snapshot.child("productTitle").getValue();
+                            String productDescription = ""+snapshot.child("productDescription").getValue();
+                            String productCategory = ""+snapshot.child("productCategory").getValue();
+                            String productQuantity = ""+snapshot.child("productQuantity").getValue();
+                            String productIcon = ""+snapshot.child("productIcon").getValue();
+                            String originalPrice = ""+snapshot.child("originalPrice").getValue();
+                            String discountPrice = ""+snapshot.child("discountPrice").getValue();
+                            String discountNote = ""+snapshot.child("discountNote").getValue();
+                            String discountAvailable = ""+snapshot.child("discountAvailable").getValue();
+                            String timestamp = ""+snapshot.child("timestamp").getValue();
+                            String uid = ""+snapshot.child("uid").getValue();
+
+                            //set data to views
+                            if (discountAvailable.equals("true")){
+                                discountSwitch.setChecked(true);
+
+                                discountedPriceEt.setVisibility(View.VISIBLE);
+                                discountedNoteEt.setVisibility(View.VISIBLE);
+                            }
+                            else
+                            {
+                                discountSwitch.setChecked(false);
+
+                                discountedPriceEt.setVisibility(View.GONE);
+                                discountedNoteEt.setVisibility(View.GONE);
+                            }
+
+                            titleEt.setText(productTitle);
+                            descriptionEt.setText(productDescription);
+                            categoryTv.setText(productCategory);
+                            discountedNoteEt.setText(discountNote);
+                            quantityEt.setText(productQuantity);
+                            priceEt.setText(originalPrice);
+                            discountedPriceEt.setText(discountPrice);
+
+                            try {
+                                Picasso.get().load(productIcon).placeholder(R.drawable.ic_add_product).into(productIconIv);
+                            }
+                            catch (Exception e){
+                                productIconIv.setImageResource(R.drawable.ic_add_product);
+                            }
                         }
-                        else
-                        {
-                            discountSwitch.setChecked(false);
 
-                            discountedPriceEt.setVisibility(View.GONE);
-                            discountedNoteEt.setVisibility(View.GONE);
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
                         }
-
-                        titleEt.setText(productTitle);
-                        descriptionEt.setText(productDescription);
-                        categoryTv.setText(productCategory);
-                        discountedNoteEt.setText(discountNote);
-                        quantityEt.setText(productQuantity);
-                        priceEt.setText(originalPrice);
-                        discountedPriceEt.setText(discountPrice);
-
-                        try {
-                            Picasso.get().load(productIcon).placeholder(R.drawable.ic_add_shopping_white).into(productIconIv);
-                        }
-                        catch (Exception e){
-                            productIconIv.setImageResource(R.drawable.ic_add_shopping_white);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                    });
     }
 
     private String productTitle, productDescription, productCategory, productQuantity, originalPrice, discountPrice, discountNote;
@@ -281,26 +286,38 @@ public class EditProductAcitivity extends AppCompatActivity {
         progressDialog.show();
 
         if (image_uri == null){
-            //upload without image
-            //setup data to upload
-            HashMap<String, Object> hashMap = new HashMap<>();
+//            //upload without image
+//            //setup data to upload
+            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Users");
+            reference1.child(Objects.requireNonNull(firebaseAuth.getUid())).child("Products").child(productId)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            //get data
+                            productIcon = ""+snapshot.child("productIcon").getValue();
 
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+            HashMap<String, Object> hashMap = new HashMap<>();
 
             hashMap.put("productTitle", ""+productTitle );
             hashMap.put("productDescription", ""+productDescription );
             hashMap.put("productCategory", ""+productCategory );
             hashMap.put("productQuantity", ""+productQuantity );
-//            hashMap.put("productIcon", ""); // no image, set empty
             hashMap.put("originalPrice", ""+originalPrice );
             hashMap.put("discountPrice", ""+discountPrice );
             hashMap.put("discountNote", ""+discountNote );
             hashMap.put("discountAvailable", ""+discountAvailable );
-//            hashMap.put("timestamp", ""+timestamp );
-//            hashMap.put("uid", ""+firebaseAuth.getUid() );
 
             //update to database
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-            reference.child(firebaseAuth.getUid()).child("Products").child(productId).setValue(hashMap)
+            reference.child(firebaseAuth.getUid()).child("Products").child(productId).updateChildren(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -356,7 +373,7 @@ public class EditProductAcitivity extends AppCompatActivity {
 
                                 //update to database
                                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-                                reference.child(firebaseAuth.getUid()).child("Products").child(productId).setValue(hashMap)
+                                reference.child(firebaseAuth.getUid()).child("Products").child(productId).updateChildren(hashMap)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
@@ -410,37 +427,33 @@ public class EditProductAcitivity extends AppCompatActivity {
     private void showImagePickDialog() {
         //options to display in dialog
         String[] options = {"CAMERA", "GALLERY"};
-        //dialog
+        //DIALOG
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("PICK IMAGE")
+        builder.setTitle("Pick Image")
                 .setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        //handle click items
-                        if (which == 0){
-                            //camera clicked
-                            if (checkCameraPermission()){
+                        //handle clicks
+                        if (which == 0) {
+                            //camera click
+                            if (checkCameraPermission()) {
+                                //camera permissions allowed
                                 pickFromCamera();
 
-                            }
-                            else {
-                                //permission not granted
+                            } else {
+                                //not allowed, request
                                 requestCameraPermission();
                             }
-                        }
-                        else {
+                        } else {
                             //gallery clicked
-                            if (checkStoragePermissions()){
-                                //permissions granted
+                            if (checkStoragePermissions()) {
+                                //storage permissions allowed
                                 pickFromGallery();
-                            }
-                            else{
-                                //permission not granted
+                            } else {
+                                //not allowed, request
                                 requestStoragePermission();
                             }
-
                         }
-
                     }
                 }).show();
     }
@@ -448,7 +461,7 @@ public class EditProductAcitivity extends AppCompatActivity {
     private void pickFromGallery() {
         //intent to pick image from gallery
         Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("images/+");
+        intent.setType("image/*");
         startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
 
     }
@@ -476,7 +489,7 @@ public class EditProductAcitivity extends AppCompatActivity {
         return result;
     }
 
-    private void requestStoragePermission(){
+    private void requestStoragePermission() {
         ActivityCompat.requestPermissions(this, storagePermissions, STORAGE_REQUEST_CODE);
 
     }
@@ -491,7 +504,7 @@ public class EditProductAcitivity extends AppCompatActivity {
         return result && result1;
     }
 
-    private void requestCameraPermission(){
+    private void requestCameraPermission() {
         ActivityCompat.requestPermissions(this, cameraPermissions, CAMERA_REQUEST_CODE);
 
     }
@@ -500,17 +513,16 @@ public class EditProductAcitivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case CAMERA_REQUEST_CODE:{
-                if (grantResults.length> 0 ){
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE: {
+                if (grantResults.length > 0) {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
-                    if (cameraAccepted && storageAccepted){
+                    if (cameraAccepted && storageAccepted) {
                         //both permission are accepted
                         pickFromCamera();
-                    }
-                    else {
+                    } else {
                         //both or one of permissions are denied
                         Toast.makeText(this, "Camera and Storage permissions are required", Toast.LENGTH_SHORT).show();
 
@@ -518,13 +530,12 @@ public class EditProductAcitivity extends AppCompatActivity {
                 }
             }
             case STORAGE_REQUEST_CODE:
-                if (grantResults.length > 0){
-                    boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (storageAccepted){
+                if (grantResults.length > 0) {
+                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    if (storageAccepted) {
                         //pick from gallery
                         pickFromGallery();
-                    }
-                    else{
+                    } else {
                         //permission denied
                         Toast.makeText(this, "Storage permission required...", Toast.LENGTH_SHORT).show();
 
@@ -538,24 +549,17 @@ public class EditProductAcitivity extends AppCompatActivity {
     //handle image pick results
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
 
-            if (resultCode == IMAGE_PICK_GALLERY_CODE){
-                //image picked from gallery
-
-                //save picked image uri
+            if (requestCode == IMAGE_PICK_GALLERY_CODE) {
+                //get picked image
                 image_uri = data.getData();
-
-                //set image
+                //set To Image view
                 productIconIv.setImageURI(image_uri);
 
-            }
-            else if(requestCode == IMAGE_PICK_CAMERA_CODE){
-                //image picked from camera
-
-                //set image
+            } else if (requestCode == IMAGE_PICK_CAMERA_CODE) {
+                //set To Image view
                 productIconIv.setImageURI(image_uri);
-
             }
         }
 

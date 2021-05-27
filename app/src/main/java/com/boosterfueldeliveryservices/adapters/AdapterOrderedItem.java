@@ -45,8 +45,8 @@ public class AdapterOrderedItem extends RecyclerView.Adapter<AdapterOrderedItem.
 
         //set data
         holder.itemTitleTv.setText(name);
-        holder.itemPriceEachTv.setText("$"+price);
-        holder.itemPriceTv.setText("$"+cost);
+        holder.itemPriceEachTv.setText("Rs."+ price);
+        holder.itemPriceTv.setText("Rs."+ cost);
         holder.itemQuantityTv.setText("["+ quantity +"]");
     }
 
@@ -56,7 +56,7 @@ public class AdapterOrderedItem extends RecyclerView.Adapter<AdapterOrderedItem.
     }
 
     //view holder class
-    class HolderOrderedItem extends RecyclerView.ViewHolder{
+    static class HolderOrderedItem extends RecyclerView.ViewHolder{
 
         //views of row_orderedItem.xml
         private TextView itemTitleTv, itemPriceTv, itemPriceEachTv, itemQuantityTv;

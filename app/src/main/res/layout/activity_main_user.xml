@@ -18,7 +18,7 @@
             android:id="@+id/logoutBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_power_white"
+            android:src="@drawable/ic_log_out"
             android:layout_alignParentEnd="true"
             android:background="@null"/>
 
@@ -26,7 +26,7 @@
             android:id="@+id/editProfileBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_edit_white"
+            android:src="@drawable/ic_edit"
             android:layout_toStartOf="@id/logoutBtn"
             android:background="@null"/>
 
@@ -35,7 +35,7 @@
             android:id="@+id/settingsBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_settings_white"
+            android:src="@drawable/ic_settings"
             android:layout_toStartOf="@id/editProfileBtn"
             android:background="@null"/>
 
@@ -47,7 +47,7 @@
             android:layout_marginEnd="10dp"
             app:c_border="true"
             app:c_border_color="@color/colorWhite"
-            android:src="@drawable/ic_store_gray"/>
+            android:src="@drawable/ic_user"/>
 
         <TextView
             android:id="@+id/nameTv"
@@ -55,8 +55,8 @@
             android:layout_height="wrap_content"
             android:text="Name"
             android:layout_toEndOf="@id/profileIv"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/muli_bold"
+            android:textColor="@color/colorBlack"
             />
 
         <TextView
@@ -66,7 +66,7 @@
             android:text="Email"
             android:layout_toEndOf="@id/profileIv"
             android:layout_below="@+id/nameTv"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             />
 
         <TextView
@@ -76,7 +76,7 @@
             android:text="Phone"
             android:layout_toEndOf="@id/profileIv"
             android:layout_below="@+id/emailTv"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             />
 
         <!--Tab: Shops, Orders-->
@@ -125,20 +125,19 @@
 
     <!--Maps UI-->
     <RelativeLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/mapsRl"
         android:layout_below="@id/toolbarRl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapsMv"
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.60"/>
-
-
-
+            android:layout_height="match_parent"
+            android:id="@+id/mapMv"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
 
     </RelativeLayout>
 
@@ -161,7 +160,7 @@
 
     <!--Orders UI-->
     <RelativeLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/ordersRl"
         android:layout_below="@id/toolbarRl"
         android:layout_width="match_parent"
@@ -172,7 +171,7 @@
             android:id="@+id/ordersRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:stackFromEnd="true"
+            android:scrollbars="vertical"
             app:reverseLayout="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/row_order_user"/>

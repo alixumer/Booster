@@ -7,28 +7,31 @@
     tools:context=".activities.WriteReviewActivity"
     android:orientation="vertical">
 
+    <!--Toolbar-->
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:padding="10dp"
         android:background="@drawable/shape_rect01">
-
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:src="@drawable/ic_back_white"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@null"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:text="Write Review"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/muli"/>
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back_white"/>
 
         <ImageButton
             android:id="@+id/writeReviewBtn"
@@ -36,7 +39,7 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:background="@null"
-            android:src="@drawable/ic_rate_review_white"/>
+            android:src="@drawable/ic_rate_review"/>
 
     </RelativeLayout>
 
@@ -47,7 +50,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_store_gray"
+        android:src="@drawable/ic_store"
         app:c_border="true"
         app:c_border_width="2dp"
         android:layout_gravity="center_horizontal"
@@ -85,17 +88,28 @@
         android:numStars="5"
         android:layout_marginTop="10dp"/>
 
-    <EditText
-        android:id="@+id/reviewEt"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_below="@id/ratingBar"
+        android:id="@+id/reviewTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_rect02"
         android:hint="Type Review..."
-        android:gravity="top"
-        android:minHeight="100dp"
-        android:padding="10dp"
-        android:layout_margin="20dp"/>
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reviewEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:minHeight="100dp"
+            android:padding="10dp"
+            android:layout_margin="20dp"
+            android:inputType="text|textCapCharacters" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/submitBtn"
@@ -105,6 +119,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_done_white"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:layout_margin="5dp"/>
 
 
