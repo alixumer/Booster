@@ -511,7 +511,7 @@ public class ShopDetailsActivity extends AppCompatActivity {
                 //set data
                 shopNameTv.setText(shopName);
                 emailTv.setText(shopEmail);
-                deliveryFeeTv.setText("Delivery Fee: $"+deliveryFee);
+                deliveryFeeTv.setText("Delivery Fee: Rs."+deliveryFee);
                 addressTv.setText(shopAddress);
                 phoneTv.setText(shopPhone);
 

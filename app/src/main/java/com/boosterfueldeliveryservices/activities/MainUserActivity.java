@@ -86,6 +86,8 @@ public class MainUserActivity extends AppCompatActivity implements OnMapReadyCal
     private double myLng = 0.0;
     private LocationManager locationManager;
 
+    double latitude, longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,6 +200,13 @@ public class MainUserActivity extends AppCompatActivity implements OnMapReadyCal
 
                     }
                 });
+
+        String fuelStations = "fuelStations";
+        String url = getUrl( latitude, longitude, fuelStations);
+    }
+
+    private String getUrl(double latitude, double longitude, String fuelStations){
+return null;
     }
 
     private void showMapsUI() {
@@ -441,7 +450,7 @@ public class MainUserActivity extends AppCompatActivity implements OnMapReadyCal
                             mapsMv.moveCamera(CameraUpdateFactory.newLatLngZoom(locations, 14f));
 
                             mapsMv.addPolyline(new PolylineOptions()
-                                    .add(new LatLng(myLat, myLng), new LatLng(d1, d2))
+                                    .add(new LatLng(32.3363, 74.3675), new LatLng(d1, d2))
                                     .width(5)
                                     .color(Color.RED));
 
